@@ -2,6 +2,8 @@
 
 Тестовое приложение на React, TypeScript и Vite.
 
+[Открыть приложение](https://wldbrrt.github.io/todo-lists-zaloghub/)
+
 ## Возможности
 
 - Добавление задач с проверкой пустого ввода
@@ -17,6 +19,6 @@ npm run dev
 ```
 
 ## Архитектура
-
+Проект организован по принципам **Feature-Sliced Design (FSD)**: код разделён на слои `app`, `widgets`, `features`, `entities` и `shared`.
 UI отделён от управления состоянием и хранения данных. `useTodos` работает через контракт `TodoRepository`;
 LocalStorage реализован отдельным адаптером. Источник данных можно заменить на API без изменений UI.
