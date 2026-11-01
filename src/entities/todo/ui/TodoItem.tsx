@@ -1,4 +1,5 @@
 import type { Todo } from '../model/types';
+import { UI_TEXT } from '../../../shared/constants/uiText';
 
 interface TodoItemProps {
   todo: Todo;
@@ -7,7 +8,9 @@ interface TodoItemProps {
 }
 
 export function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
-  const statusLabel = todo.completed ? 'Mark as active' : 'Mark as completed';
+  const statusLabel = todo.completed
+    ? UI_TEXT.todoItem.markActive
+    : UI_TEXT.todoItem.markCompleted;
 
   return (
     <li className={todo.completed ? 'todo-item completed' : 'todo-item'}>
@@ -18,7 +21,7 @@ export function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
         aria-label={`${statusLabel}: ${todo.title}`}
         aria-pressed={todo.completed}
       >
-        {todo.completed ? '✓' : '○'}
+        {todo.completed ? UI_TEXT.todoItem.completedMark : UI_TEXT.todoItem.activeMark}
       </button>
 
       <span className="todo-title">{todo.title}</span>
@@ -27,9 +30,9 @@ export function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
         type="button"
         className="todo-delete"
         onClick={() => onDelete(todo.id)}
-        aria-label={`Delete task: ${todo.title}`}
+        aria-label={`${UI_TEXT.todoItem.deleteAriaLabelPrefix}${todo.title}`}
       >
-        Delete
+        {UI_TEXT.todoItem.deleteButtonText}
       </button>
     </li>
   );

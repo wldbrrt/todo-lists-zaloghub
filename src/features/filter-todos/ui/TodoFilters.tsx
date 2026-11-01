@@ -1,4 +1,6 @@
 import type { TodoFilter } from '../../../entities/todo/model/types';
+import { TODO_FILTER } from '../../../entities/todo/model/constants';
+import { UI_TEXT } from '../../../shared/constants/uiText';
 
 interface TodoFiltersProps {
   filter: TodoFilter;
@@ -6,14 +8,14 @@ interface TodoFiltersProps {
 }
 
 const FILTERS: { value: TodoFilter; label: string }[] = [
-  { value: 'all', label: 'All' },
-  { value: 'active', label: 'Active' },
-  { value: 'completed', label: 'Completed' },
+  { value: TODO_FILTER.ALL, label: UI_TEXT.filters.all },
+  { value: TODO_FILTER.ACTIVE, label: UI_TEXT.filters.active },
+  { value: TODO_FILTER.COMPLETED, label: UI_TEXT.filters.completed },
 ];
 
 export function TodoFilters({ filter, onChange }: TodoFiltersProps) {
   return (
-    <div className="filter-group" aria-label="Todo filters">
+    <div className="filter-group" aria-label={UI_TEXT.filters.groupLabel}>
       {FILTERS.map(({ value, label }) => {
         const isActive = filter === value;
 
@@ -24,7 +26,7 @@ export function TodoFilters({ filter, onChange }: TodoFiltersProps) {
             className={isActive ? 'filter-button active' : 'filter-button'}
             onClick={() => onChange(value)}
             aria-pressed={isActive}
-            aria-label={`Filter tasks: ${label}`}
+            aria-label={`${UI_TEXT.filters.ariaLabelPrefix}${label}`}
           >
             {label}
           </button>

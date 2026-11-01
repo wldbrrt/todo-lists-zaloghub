@@ -1,4 +1,5 @@
 import type { FormEvent } from 'react';
+import { UI_TEXT } from '../../../shared/constants/uiText';
 
 interface AddTodoFormProps {
   title: string;
@@ -23,20 +24,24 @@ export function AddTodoForm({
   return (
     <form className="todo-form" onSubmit={handleSubmit}>
       <label className="sr-only" htmlFor="todo-title-input">
-        New task title
+        {UI_TEXT.addTodo.inputLabel}
       </label>
       <input
         id="todo-title-input"
         type="text"
         value={title}
         onChange={(event) => onTitleChange(event.target.value)}
-        placeholder="What needs to be done?"
+        placeholder={UI_TEXT.addTodo.placeholder}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? 'todo-input-error' : undefined}
         disabled={disabled}
       />
-      <button type="submit" disabled={disabled || !title.trim()} aria-label="Add task">
-        Add
+      <button
+        type="submit"
+        disabled={disabled || !title.trim()}
+        aria-label={UI_TEXT.addTodo.addButtonLabel}
+      >
+        {UI_TEXT.addTodo.addButtonText}
       </button>
       {error ? (
         <p id="todo-input-error" className="field-error" role="alert">

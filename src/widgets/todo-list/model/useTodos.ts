@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { Todo, TodoFilter } from '../../../entities/todo/model/types';
+import { TODO_FILTER } from '../../../entities/todo/model/constants';
+import { UI_TEXT } from '../../../shared/constants/uiText';
 import type { TodoRepository } from '../../../shared/api/todoRepository';
 
 export interface UseTodosResult {
@@ -16,7 +18,7 @@ export interface UseTodosResult {
 
 export function useTodos(repository: TodoRepository): UseTodosResult {
   const [todos, setTodos] = useState<Todo[]>([]);
-  const [filter, setFilter] = useState<TodoFilter>('all');
+  const [filter, setFilter] = useState<TodoFilter>(TODO_FILTER.ALL);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -35,7 +37,7 @@ export function useTodos(repository: TodoRepository): UseTodosResult {
           setError(null);
         } catch (saveError) {
           console.error('Failed to save todos', saveError);
-          setError('Unable to save tasks.');
+          setError(UI_TEXT.errors.saveTodos);
         }
       };
 
@@ -57,7 +59,7 @@ export function useTodos(repository: TodoRepository): UseTodosResult {
     } catch (loadError) {
       console.error('Failed to load todos', loadError);
       hasHydratedRef.current = true;
-      setError('Unable to load tasks.');
+      setError(UI_TEXT.errors.loadTodos);
     } finally {
       setIsLoading(false);
     }
@@ -78,7 +80,7 @@ export function useTodos(repository: TodoRepository): UseTodosResult {
       const normalizedTitle = title.trim();
 
       if (!normalizedTitle) {
-        setError('Please enter a task title.');
+        setError(UI_TEXT.addTodo.emptyTitleError);
         return;
       }
 
@@ -130,11 +132,11 @@ export function useTodos(repository: TodoRepository): UseTodosResult {
 
   const filteredTodos = useMemo(() => {
     switch (filter) {
-      case 'active':
+      case TODO_FILTER.ACTIVE:
         return todos.filter((todo) => !todo.completed);
-      case 'completed':
+      case TODO_FILTER.COMPLETED:
         return todos.filter((todo) => todo.completed);
-      case 'all':
+      case TODO_FILTER.ALL:
       default:
         return todos;
     }

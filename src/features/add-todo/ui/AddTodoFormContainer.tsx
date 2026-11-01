@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { UI_TEXT } from '../../../shared/constants/uiText';
 import { AddTodoForm } from './AddTodoForm';
 
 interface AddTodoFormContainerProps {
@@ -25,7 +26,7 @@ export function AddTodoFormContainer({
     const normalizedTitle = title.trim();
 
     if (!normalizedTitle) {
-      setError('Введите название задачи.');
+      setError(UI_TEXT.addTodo.emptyTitleError);
       return;
     }
 
