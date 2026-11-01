@@ -1,3 +1,5 @@
+import { TODO_FILTER } from './constants';
+
 export interface Todo {
   id: string;
   title: string;
@@ -5,4 +7,4 @@ export interface Todo {
   createdAt: string;
 }
 
-export type TodoFilter = 'all' | 'active' | 'completed';
+export type TodoFilter = (typeof TODO_FILTER)[keyof typeof TODO_FILTER];

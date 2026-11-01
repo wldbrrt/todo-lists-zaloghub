@@ -1,5 +1,6 @@
 import { AddTodoFormContainer } from '../features/add-todo/ui/AddTodoFormContainer';
 import { TodoFilters } from '../features/filter-todos/ui/TodoFilters';
+import { UI_TEXT } from '../shared/constants/uiText';
 import { LocalStorageTodoRepository } from '../shared/lib/storage/localStorageTodoRepository';
 import { TodoList } from '../widgets/todo-list/ui/TodoList';
 import { useTodos } from '../widgets/todo-list/model/useTodos';
@@ -12,10 +13,10 @@ export function App() {
 
   return (
     <main className="app-shell">
-      <section className="todo-panel" aria-label="Todo list">
+      <section className="todo-panel" aria-label={UI_TEXT.app.sectionLabel}>
         <header className="todo-header">
-          <p className="eyebrow">Tasks</p>
-          <h1>Todo List</h1>
+          <p className="eyebrow">{UI_TEXT.app.eyebrow}</p>
+          <h1>{UI_TEXT.app.title}</h1>
         </header>
 
         <AddTodoFormContainer onSubmit={addTodo} disabled={isLoading} />
@@ -30,7 +31,7 @@ export function App() {
 
         {isLoading ? (
           <p className="status-message" aria-live="polite">
-            Loading tasks...
+            {UI_TEXT.app.loading}
           </p>
         ) : (
           <TodoList todos={filteredTodos} onToggle={toggleTodo} onDelete={deleteTodo} />

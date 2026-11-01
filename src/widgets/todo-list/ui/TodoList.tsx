@@ -1,4 +1,5 @@
 import type { Todo } from '../../../entities/todo/model/types';
+import { UI_TEXT } from '../../../shared/constants/uiText';
 import { TodoItem } from '../../../entities/todo/ui/TodoItem';
 import { EmptyState } from '../../../shared/ui/EmptyState';
 
@@ -12,8 +13,8 @@ export function TodoList({ todos, onToggle, onDelete }: TodoListProps) {
   if (todos.length === 0) {
     return (
       <EmptyState
-        title="No tasks yet"
-        description="Add your first task to get started."
+        title={UI_TEXT.emptyState.title}
+        description={UI_TEXT.emptyState.description}
       />
     );
   }
