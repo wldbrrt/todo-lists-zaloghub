@@ -12,8 +12,6 @@ dist
 dist-ssr
 *.local
 docs
-.github
-readme.md
 
 # Editor directories and files
 .vscode/*
